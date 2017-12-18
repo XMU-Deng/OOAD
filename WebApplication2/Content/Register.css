@@ -1,0 +1,56 @@
+﻿/* CSS Document */
+
+@import url('Register.css');
+
+body {
+    width: 100%;
+    background: #66CCFF;
+    height: 100%;
+}
+
+/*整体背景*/
+.fullbackground {
+    background-color: #66CCFF
+}
+
+/*上半部分背景*/
+.backbox {
+    position: relative;
+    width: 100%;
+    height: 30%;
+}
+
+/*背景上弦场图片*/
+.back {
+    width: 100%;
+    height: 100%;
+}
+
+/*灯泡图片*/
+.lamp {
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    width: 16%;
+    height: 25%;
+}
+
+/*灯泡旁边字体*/
+.FONTRegist {
+    margin-left: 40%;
+    color: #000000;
+    margin-top: 11%;
+    font-size: 5vw;
+    position: absolute;
+    top: 0px;
+    left: -80px;
+    text-decoration: underline;
+}
+
+
+/*下面蓝色选择容器*/
+.blue_box {
+    background-color: #66CCFF;
+    width: 100%;
+    height: -webkit-fill-available;
+}
