@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="divport" content="width=device-width,
+                                     initial-scale=1.0,
+                                     maximum-scale=1.0">
+    <title>课程管理系统</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="~/Content/CreateSchoolUI.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: "/api/school/province",
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $("#province").text("省份："+result.Data[3]+"省");
+                }
+            })
+            $.ajax({
+                type: 'GET',
+                url: "/api/school/city/province={福建}",
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $("#city").text("州市：" + result.Data[2] + "市");
+                }
+            })
+            $("#create").click(function () {
+                var data0 = { schoolname: document.getElementById("schoolname").value };
+                $.ajax({
+                    type: 'POST',
+                    url: "/api/school",
+                    data: JSON.stringify(data0),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.Data ==false) {
+                            alert('与其他学校重复');
+                        }
+                        else {                            
+                            alert('创建成功');  
+                            jump();
+                            $(window).attr("location", '/Login/ChooseSchool_school0');
+                        }
+                    }
+                })
+            })
+            function jump() {
+                url = "ChooseSchool_school.cshtml?schoolname=" + schoolname;
+                window.location.href = url;
+            }
+        });
+    </script>
+</head>
+<body class="body">
+    <div class="PictureDiv">
+        <!-- 背景图的div -->
+        <img class="bulb" src="~/Content/Theme/bulb.png" />
+        <img src="~/Content/Theme/background.jpg" class="Picture" />
+        <div class="title">创建学校</div>
+    </div>
+    <div class="hrDiv"></div>
+    <!--细线，hr不好设置css，用一个高度很小的div来代替-->
+    <div class="mainView">
+        <span class="font1" id="province"></span>
+        <span class="font2" id="city"></span>
+        <span class="schoolName">学校名：</span>
+        <input class="inputSchool" id="schoolname"/>
+        <img src="~/Content/Theme/warning.png" class="tipIcon" />
+        <span class="tipFont">提交后不能再修改</span>
+        <button class="createButton" id="create">创建</button>
+    </div>
+    </body>
+</html>

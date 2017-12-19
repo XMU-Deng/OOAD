@@ -1,0 +1,120 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程管理系统</title>
+    <link href="~/Content/ChooseSchool.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: "/api/school/province",
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $("#province").text(result.Data[3]);
+                }
+            })
+            $.ajax({
+                type: 'GET',
+                url: "/api/school/city/province={福建}",
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $("#city").text(result.Data[2]);
+                }
+            })            
+            $.ajax({
+                type: 'GET',
+                url: "/api/school/city={厦门}",
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data.Data, function (i, value) {
+                        $("#schools").append('<li id=\"ptr\" class=\"ptr\">' + value.name + '</li>');                        
+                    });
+                }
+            }) 
+            
+            $("#province").click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: "/api/school/province",
+                    data: "",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $(window).attr("location", '/Login/ChooseSchool_province');
+                    }
+                })
+            })
+            $("#city").click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: "/api/school/city/province={福建}",
+                    data: "",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $(window).attr("location", '/Login/ChooseSchool_city');
+                    }
+                })
+            })
+            $("#noSch").click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: "/api/school/city={厦门}",
+                    data: "",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $(window).attr("location", '/Login/CreateSchool');
+                    }
+                })
+            })
+        });
+        $(document).on("click", ".ptr", function () {
+            $.ajax({
+                type: 'GET',
+                url: "/api/school/city={厦门}",
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    alert('选择成功');
+                }
+            })            
+        });        
+    </script>
+</head>
+<body>
+    <div class="topbox">
+        <div class="fixTop">
+            <img src="~/Content/Theme/bulb.png" class="bulbimg" />
+            <strong class="title0">请选择您的学校</strong>
+            <img class="img" src="~/Content/Theme/background.jpg" />
+        </div>
+        <!--这个class与js有关 实现列表切换-->
+        <div>
+            <div class="fixTop title">
+                <div id="province"></div>
+                <div id="city"></div>
+                <div id="school" class="cur">学校</div>
+            </div>
+            <div class="list">
+                <ol id="schools"></ol>
+                <ol id="schoolname0" class="ptr">&emsp;厦门市人民公园</ol>
+                <ol id="noSch" class="str" ><a href="#">无学校？选择创建</a></ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

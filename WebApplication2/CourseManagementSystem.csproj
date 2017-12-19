@@ -53,12 +53,21 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -141,10 +150,24 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ClassController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\CourseInfoUIController.cs" />
+    <Compile Include="Controllers\CourseUIController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\GroupUIController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SchoolController.cs" />
+    <Compile Include="Controllers\SeminarController.cs" />
+    <Compile Include="Controllers\SeminarUIController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\TopicController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -153,21 +176,94 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CheckStudentInfo.css" />
+    <Content Include="Content\CheckTeacherInfo.css" />
+    <Content Include="Content\ChooseCharacter.css" />
+    <Content Include="Content\ChooseSchool.css" />
     <Content Include="Content\ClassManage.css" />
     <Content Include="Content\CallingList.css" />
+    <Content Include="Content\CourseInfoUI.css" />
+    <Content Include="Content\CourseInfo\FileIcon.png" />
+    <Content Include="Content\CourseInfo\HouseIcon.png" />
+    <Content Include="Content\CourseInfo\MailIcon.png" />
+    <Content Include="Content\CourseInfo\UserIcon.png" />
+    <Content Include="Content\CourseUI.css" />
+    <Content Include="Content\Course\nine.png" />
+    <Content Include="Content\CreateSchoolUI.css" />
+    <Content Include="Content\GradePresentation.css" />
+    <Content Include="Content\GroupChooseTopicUI.css" />
+    <Content Include="Content\GroupChooseTopicUI\nine.png" />
+    <Content Include="Content\GroupChooseTopicUI\users.png" />
     <Content Include="Content\GroupInfo.css" />
     <Content Include="Content\CallInRoll.css" />
+    <Content Include="Content\GroupInfoUI2.css" />
+    <Content Include="Content\GroupList.css" />
+    <Content Include="Content\GroupList\user.png" />
+    <Content Include="Content\GroupList\users.png" />
+    <Content Include="Content\LoginUI.css" />
+    <Content Include="Content\RandomGroupChooseTopicUI2.css" />
     <Content Include="Content\Register.css" />
+    <Content Include="Content\RegisterUI.css" />
+    <Content Include="Content\RollCallListUI.css" />
+    <Content Include="Content\RollStartCallUI.css" />
+    <Content Include="Content\Seminar.css" />
+    <Content Include="Content\StudentBindingUI.css" />
+    <Content Include="Content\StudentMainUI.css" />
+    <Content Include="Content\StudentRollCallUI.css" />
+    <Content Include="Content\TeacherBindingUI.css" />
+    <Content Include="Content\TeacherMainUI.css" />
+    <Content Include="Content\themes\add.png" />
+    <Content Include="Content\themes\background.jpg" />
+    <Content Include="Content\themes\blueBoard.png" />
+    <Content Include="Content\themes\bulb.png" />
+    <Content Include="Content\themes\ClassManage.png" />
+    <Content Include="Content\themes\clip.png" />
+    <Content Include="Content\themes\clock.png" />
+    <Content Include="Content\themes\date.png" />
+    <Content Include="Content\themes\FileIcon.png" />
+    <Content Include="Content\themes\heart %282%29.png" />
+    <Content Include="Content\themes\heart.png" />
+    <Content Include="Content\themes\heart_chosen.png" />
+    <Content Include="Content\themes\heart_empty.png" />
+    <Content Include="Content\themes\HouseIcon.png" />
+    <Content Include="Content\themes\line.png" />
+    <Content Include="Content\themes\mail.png" />
+    <Content Include="Content\themes\MailIcon.png" />
+    <Content Include="Content\themes\ninedot.png" />
+    <Content Include="Content\themes\redCross.png" />
+    <Content Include="Content\themes\site.png" />
+    <Content Include="Content\themes\teacher.png" />
     <Content Include="Content\themes\user.png" />
+    <Content Include="Content\themes\UserIcon.png" />
+    <Content Include="Content\themes\users 2.png" />
     <Content Include="Content\themes\users.png" />
-    <Content Include="Content\themes\加号.png" />
-    <Content Include="Content\themes\曲别针.png" />
-    <Content Include="Content\themes\lamp.png" />
-    <Content Include="Content\themes\班级.png" />
-    <Content Include="Content\themes\红叉.png" />
-    <Content Include="Content\themes\back.jpg" />
-    <Content Include="Content\themes\蓝色板.png" />
-    <Content Include="Content\themes\闹钟.png" />
+    <Content Include="Content\themes\warning.png" />
+    <Content Include="Content\Theme\add.png" />
+    <Content Include="Content\Theme\background.jpg" />
+    <Content Include="Content\Theme\blueBoard.png" />
+    <Content Include="Content\Theme\bulb.png" />
+    <Content Include="Content\Theme\ClassManage.png" />
+    <Content Include="Content\Theme\clip.png" />
+    <Content Include="Content\Theme\clock.png" />
+    <Content Include="Content\Theme\date.png" />
+    <Content Include="Content\Theme\FileIcon.png" />
+    <Content Include="Content\Theme\heart %282%29.png" />
+    <Content Include="Content\Theme\heart.png" />
+    <Content Include="Content\Theme\heart_chosen.png" />
+    <Content Include="Content\Theme\heart_empty.png" />
+    <Content Include="Content\Theme\HouseIcon.png" />
+    <Content Include="Content\Theme\line.png" />
+    <Content Include="Content\Theme\mail.png" />
+    <Content Include="Content\Theme\MailIcon.png" />
+    <Content Include="Content\Theme\ninedot.png" />
+    <Content Include="Content\Theme\redCross.png" />
+    <Content Include="Content\Theme\site.png" />
+    <Content Include="Content\Theme\teacher.png" />
+    <Content Include="Content\Theme\user.png" />
+    <Content Include="Content\Theme\UserIcon.png" />
+    <Content Include="Content\Theme\users 2.png" />
+    <Content Include="Content\Theme\users.png" />
+    <Content Include="Content\Theme\warning.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -177,6 +273,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -188,6 +285,29 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Student\Score.cshtml" />
+    <Content Include="Views\Login\CheckStudentInfoUI.cshtml" />
+    <Content Include="Views\Login\CheckTeacherInfoUI.cshtml" />
+    <Content Include="Views\Login\ChooseCharacter.cshtml" />
+    <Content Include="Views\Login\ChooseSchool_city.cshtml" />
+    <Content Include="Views\Login\ChooseSchool_province.cshtml" />
+    <Content Include="Views\Login\ChooseSchool_school.cshtml" />
+    <Content Include="Views\Login\ChooseSchool_school0.cshtml" />
+    <Content Include="Views\Login\CreateSchool.cshtml" />
+    <Content Include="Views\Login\LoginUI.cshtml" />
+    <Content Include="Views\Login\RegisterUI.cshtml" />
+    <Content Include="Views\Login\StudentBindingUI.cshtml" />
+    <Content Include="Views\Login\StudentMainUI.cshtml" />
+    <Content Include="Views\Login\TeacherBindingUI.cshtml" />
+    <Content Include="Views\Login\TeacherMainUI.cshtml" />
+    <Content Include="Views\CourseInfoUI\CourseInfoUI.cshtml" />
+    <Content Include="Views\CourseUI\CourseUI.cshtml" />
+    <Content Include="Views\GroupUI\GroupChooseTopicUI.cshtml" />
+    <Content Include="Views\GroupUI\GroupUI.cshtml" />
+    <Content Include="Views\SeminarUI\Seminar.cshtml" />
+    <Content Include="Views\Login\StudentBindingUI0.cshtml" />
+    <Content Include="Views\Login\TeacherBindingUI0.cshtml" />
+    <None Include="Views\Student\StudentRollCallUI.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -200,17 +320,16 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Teacher\ClassManage.cshtml" />
-    <Content Include="Views\Teacher\Random_StartCalling.cshtml" />
-    <Content Include="Views\Teacher\Random_InCallingPeriod.cshtml" />
-    <Content Include="Views\Teacher\Random_EndCalling.cshtml" />
-    <Content Include="Views\Teacher\CallingList.cshtml" />
-    <Content Include="Views\Teacher\RandomGroupInfo.cshtml" />
-    <Content Include="Views\Teacher\Fixed_StartCalling.cshtml" />
-    <Content Include="Views\Teacher\Fixed_InCallingPeriod.cshtml" />
-    <Content Include="Views\Teacher\Fixed_EndCalling.cshtml" />
-    <Content Include="Views\Teacher\Fixed_EndCallingList.cshtml" />
-    <Content Include="Views\Teacher\FixedGroupInfo.cshtml" />
-    <Content Include="Views\Register\Register.cshtml" />
+    <Content Include="Views\Teacher\FixedEndRollCallUI.cshtml" />
+    <Content Include="Views\Teacher\FixedGroupInfoUI.cshtml" />
+    <Content Include="Views\Teacher\FixedRollCallEndUI.cshtml" />
+    <Content Include="Views\Teacher\FixedRollCallUI.cshtml" />
+    <Content Include="Views\Teacher\FixedRollStartCallUI.cshtml" />
+    <Content Include="Views\Teacher\GroupInfoUI.cshtml" />
+    <Content Include="Views\Teacher\RandomEndRollCallUI.cshtml" />
+    <Content Include="Views\Teacher\RandomRollCallUI.cshtml" />
+    <Content Include="Views\Teacher\RandomRollStartCallUI.cshtml" />
+    <Content Include="Views\Teacher\RollCallListUI.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -227,7 +346,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

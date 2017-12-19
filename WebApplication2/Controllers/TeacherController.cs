@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
+using System.Text;
+
 
 namespace WebApplication2.Controllers
 {
@@ -19,52 +22,52 @@ namespace WebApplication2.Controllers
             return View();
         }
 
-        public ActionResult Random_StartCalling()
+        public ActionResult RandomRollStartCallUI()
         {
             return View();
         }
 
-        public ActionResult Random_InCallingPeriod()
+        public ActionResult RandomRollCallUI()
         {
             return View();
         }
 
-        public ActionResult Random_EndCalling()
+        public ActionResult RandomEndRollCallUI()
         {
             return View();
         }
 
-        public ActionResult CallingList()
+        public ActionResult RollCallListUI()
         {
             return View();
         }
 
-        public ActionResult RandomGroupInfo()
+        public ActionResult GroupInfoUI()
         {
             return View();
         }
 
-        public ActionResult Fixed_StartCalling()
+        public ActionResult FixedRollStartCallUI()
         {
             return View();
         }
 
-        public ActionResult Fixed_InCallingPeriod()
+        public ActionResult FixedRollCallUI()
         {
             return View();
         }
 
-        public ActionResult Fixed_EndCalling()
+        public ActionResult FixedRollCallEndUI()
         {
             return View();
         }
 
-        public ActionResult Fixed_EndCallingList()
+        public ActionResult FixedEndRollCallUI()
         {
             return View();
         }
 
-        public ActionResult FixedGroupInfo()
+        public ActionResult FixedGroupInfoUI()
         {
             return View();
         }

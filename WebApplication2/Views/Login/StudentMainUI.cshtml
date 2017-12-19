@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="divport" content="width=device-width,
+                                     initial-scale=1.0,
+                                     maximum-scale=1.0"
+                                    >
+<title>课程管理系统</title>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="~/Content/StudentMainUI.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: "/api/me",
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $("#name").text("姓名：" + data.Data[0].name);
+                    $("#studentID").text("学号：" + data.Data[0].number);
+                }
+            })
+            $.ajax({
+                type: 'GET',
+                url: "/api/class?course=OOAD&courseTeacher=\"邱明\"",
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data.Data, function (i, value) {
+                        $("#blueboxes").append('<div class=\"blueBox\">'+ '<p id=\"ptr\" class=\"leftText\">' + value.courseName + '</p>' + '<p class=\"rightText\">' + '老师：' + value.courseTeacher + '</p>' +'</div >');
+                    });
+                }
+            })
+            $("#personal_information").click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: "/api/me",
+                    data: "",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $(window).attr("location", '/Login/CheckStudentInfoUI');
+                    }
+                })
+            })
+            $(document).on("click", ".blueBox", function () {
+                $.ajax({
+                    type: 'GET',
+                    url: "/api/school/city={厦门}",
+                    data: "",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $(window).attr("location", '/CourseUI/CourseUI');
+                    }
+                })
+            });
+        });
+    </script>
+</head>
+<body class="body">
+	<div class="PictureDiv" id="personal_information"><!-- 背景图的div -->
+		<img class="user" src="~/Content/Theme/user.png" />
+		<img src="~/Content/Theme/background.jpg" class="Picture"/>
+        <div class="name" id="name"></div>
+        <div class="studentID" id="studentID"></div>
+	</div>
+
+  <!--细线，hr不好设置css，用一个高度很小的div来代替-->
+  <div class="hrDiv" id="blueboxes"></div>
+</body>
+</html>
+
+
+
